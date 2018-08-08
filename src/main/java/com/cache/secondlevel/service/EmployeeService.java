@@ -18,4 +18,8 @@ public class EmployeeService {
     public Employee doGetEmployee(final String name) {
         return employeeDAO.findByusername(name);
     }
+
+    public void doUpdateEmployee(final Employee emp) {
+        employeeDAO.save(emp);
+    }
 }
