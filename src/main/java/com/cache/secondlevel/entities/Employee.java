@@ -5,6 +5,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity(name = "employee")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -27,7 +28,20 @@ public class Employee {
     
     @Column(name="accress_level")
     private int accessLevel;
-    
+
+	@OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
+	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+	@JoinColumn(name = "empId")
+	List<Organization> organizations ;
+
+	public List<Organization> getOrganizations() {
+		return organizations;
+	}
+
+	public void setOrganizations(final List<Organization> organizations) {
+		this.organizations = organizations;
+	}
+
 	public Integer getId() {
 		return id;
 	}
